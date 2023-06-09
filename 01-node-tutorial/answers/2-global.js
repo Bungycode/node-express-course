@@ -6,14 +6,13 @@
 // module     - info about current module (file)
 // process    - info about env where the program is being executed
 
-console.log(global)
-console.log(__dirname)
-console.log(__filename)
-console.log(global.require)
-console.log(global.module)
-console.log(global.process)
+console.log(global);
+console.log(__dirname);
+console.log(__filename);
+console.log(global.require);
+console.log(global.module);
+console.log(global.process);
 setInterval(() => {
-  console.log('hello world')
-  console.log(__dirname)
-  console.log(global.process.env.MY_VAR)
-}, 1000)
+  console.log(__dirname);
+  console.log(global.process.env.MY_VAR);
+}, 1000);
