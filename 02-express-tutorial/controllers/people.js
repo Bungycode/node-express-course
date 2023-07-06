@@ -26,9 +26,7 @@ const getPeople = (req, res) => {
 // Get single person handler
 const getSinglePerson = (req, res) => {
   try {
-    console.log("req.params.id =", req.params.id);
     const person = people.find((person) => person.id === Number(req.params.id));
-    console.log("person =", person);
 
     if (!person) {
       return res.status(404).json({
@@ -53,11 +51,9 @@ const getSinglePerson = (req, res) => {
 // Add person handler
 const addPerson = (req, res) => {
   try {
-    console.log("req.body =", req.body);
     if (req.body.name) {
       // In the assignment instructions, using 'id: people.length' without the '+ 1' causes there to be two objects with an id of '5' since the first index starts at an id of '0'. So, I added '+ 1' to make the new person have an id of '6'.
       people.push({ id: people.length + 1, name: req.body.name });
-      console.log("people array after creating new person:", people);
       return res.status(201).json({
         success: true,
         message: "Person name created!",
@@ -83,11 +79,9 @@ const addPerson = (req, res) => {
 // Update person handler
 const updatePerson = (req, res) => {
   try {
-    console.log("req.params.id =", req.params.id);
     const person = people.find(
       (person) => person.id === parseInt(req.params.id)
     );
-    console.log("person =", person);
 
     if (!person) {
       return res.status(404).json({
@@ -104,7 +98,6 @@ const updatePerson = (req, res) => {
       }
       return person;
     });
-    console.log("newPeople =", newPeople);
     return res.status(200).json({
       success: true,
       message: `Updated the person with an id of ${req.params.id}!`,
@@ -122,11 +115,9 @@ const updatePerson = (req, res) => {
 // Delete person handler
 const deletePerson = (req, res) => {
   try {
-    console.log("req.params.id =", req.params.id);
     const person = people.find(
       (person) => person.id === parseInt(req.params.id)
     );
-    console.log("person =", person);
 
     if (!person) {
       return res.status(404).json({
@@ -139,7 +130,6 @@ const deletePerson = (req, res) => {
     const newPeople = people.filter(
       (person) => person.id !== Number(req.params.id)
     );
-    console.log("newPeople =", newPeople);
     return res.status(200).json({
       success: true,
       message: `Removed the person with an id of ${req.params.id}!`,

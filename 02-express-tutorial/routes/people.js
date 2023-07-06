@@ -9,7 +9,6 @@ const {
 } = require("../controllers/people");
 
 const router = express.Router();
-console.log("router object BEFORE adding routes =", router);
 
 // people end points
 // /api/v1/people requests
@@ -21,7 +20,5 @@ router
   .get(getSinglePerson)
   .put(updatePerson)
   .delete(deletePerson);
-
-console.log("router object AFTER adding routes =", router);
 
 module.exports = router;
