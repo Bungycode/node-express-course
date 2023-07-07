@@ -154,6 +154,75 @@ const names = [
   'Amy You'
 ];
 
+// - Create a new array with only each person's last name
+const lastNameOnly = names.map((name) => {
+  const lastWhiteSpace = name.lastIndexOf(" ");
+  console.log("lastName?", name.slice(lastWhiteSpace).trim())
+  return name.slice(lastWhiteSpace).trim();
+});
+console.log("\n*****START*****\n\nlastNameOnly =", lastNameOnly);
+
+// - Filter names that don't match the format "<first> <last>"
+//   - Should remove Tam because she has a double-space
+//   - Should remove Carlow because he has a middle-name
+//   - Should also remove names like:
+//     - "Timothy      Cook"
+//     - "Nick_Masters"
+//     - "Timmy-Turner"
+//     - "Billy\nBob"
+//     - etc.
+const fnameSpaceLname = names.filter((name) => {
+  // Used regex and regex method to return strings with only one space.
+  return /^\w+ \w+$/.test(name);
+});
+console.log("fnameSpaceLname =", fnameSpaceLname);
+
+// - Create a new array where everyone's name is converted to "Title Case"
+//   - The first character of each word should be uppercase
+//   - All other characters in the word should be lowercase
+//   - expected output is ['Dimitry Santiago', 'Carlos D. Perez', 'Tam Person', ...]
+
+const namesTitleCase = names.map((name) => {
+  return name
+    .split(/ +/)
+    .map((item) => {
+      return item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+    })
+    .join(" ");
+});
+console.log("namesTitleCase =", namesTitleCase);
+
+// - Last Challenge:
+//     Remove names with the wrong format
+//     AND change it to "Title Case"
+//     AND remove people whose last name ends with z
+//     AND write a message asking them to sign up
+
+const lastChallenge = names
+  .filter((name) => {
+    // Used regex and regex method to return strings with only one space.
+    return /^(\S*\s){1}\S*$/.test(name);
+  })
+  .map((name) => {
+    return name
+      .split(/ +/)
+      .map((item) => {
+        return item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+      })
+      .join(" ");
+  })
+  .reduce((map, person) => {
+    if (person.lastIndexOf("z") !== -1) {
+      return map;
+    }
+    map.push(person);
+    return map;
+  }, [])
+  .map((person) => {
+    return `Hey ${person}! Do you want to sign up? :)`;
+  });
+console.log("lastChallenge =", lastChallenge, "\n\n*****End*****\n");
+
 ///////////////////////////////////////////////////////////////////////////////
 //// put your answers above if you wish to do the challenges on your own //////
 ///////////////////////////////////////////////////////////////////////////////
