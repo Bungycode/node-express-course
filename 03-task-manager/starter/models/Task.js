@@ -7,8 +7,16 @@ const mongoose = require("mongoose");
 // A model is also known as a representation for
 // that collection.
 const TaskSchema = new mongoose.Schema({
-  name: String,
-  completed: Boolean,
+  name: {
+    type: String,
+    required: [true, "Must include a name!"],
+    trim: true,
+    maxLength: [20, "name cannot exceed 20 characters!"]
+  },
+  completed: {
+    type: Boolean,
+    default: false
+  },
 });
 
 // In mongoose, a model is a wrapper for the schema.

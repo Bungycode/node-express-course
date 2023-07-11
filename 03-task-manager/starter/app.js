@@ -6,6 +6,10 @@ const tasksRoutes = require("./routes/tasks");
 const connectDB = require("./db/connect");
 // Import the dotenv package.
 require("dotenv").config();
+// Import catch all route
+const notFound = require("./middleware/not-found")
+// Import custom error handler
+const errorHandlerMiddleware = require("./middleware/error-handler")
 
 // Create the express instance
 const app = express();
@@ -13,24 +17,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(express.static('./public'))
 app.use(express.json());
-// Routes
-app.get("/hello", (req, res) => {
-  res.send("Task Manager App");
-});
 
+// Routes
 app.use("/api/v1/tasks", tasksRoutes);
 
-// app.get('/api/v1/tasks')          - get all the tasks
-// app.post('/api/v1/tasks')         - create a new task
-// app.get('/api/v1/tasks:id')       - get single task
-// app.patch('/api/v1/tasks:id')     - update task
-// app.delete('/api/v1/tasks:id')    - delete task
-
 // Catch all end point for pages that do not exist.
-app.all("*", (req, res) => {
-  res.status(404).send("<h1>Page not found - 404 error</h1>");
-});
+app.use(notFound)
+// Custom error handler needs to be last middleware.
+app.use(errorHandlerMiddleware)
 
 // Connect to the DB then start the server.
 const start = async () => {
