@@ -16,15 +16,6 @@ app.use(express.json());
 // Routes
 app.use("/api/v1/products", productsRoutes);
 
-// app.get(
-//   "/test",
-//   asyncWrapper((req, res) => {
-//     res
-//       .status(200)
-//       .send('<h1>Store Api<h1><a href="/api/v1/products">Products</a>');
-//   })
-// );
-
 // middleware
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
