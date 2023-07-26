@@ -13,8 +13,6 @@ const login = async (req, res) => {
   // Joi - package
   // check in the controller
 
-  console.log("username =", username);
-  console.log("password =", password);
   if (!username || !password) {
     throw new BadRequestError("Please provide an email and password!");
   }
@@ -27,12 +25,10 @@ const login = async (req, res) => {
   const token = jwt.sign({ id, username }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
-  console.log("token =", token);
   res.status(200).json({ msg: "user created!", token });
 };
 
 const dashboard = async (req, res) => {
-  console.log("req.user =", req.user);
   const luckynumber = Math.floor(Math.random() * 100);
 
   return res.status(200).json({

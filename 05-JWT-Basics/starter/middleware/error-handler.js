@@ -5,7 +5,6 @@ const errorHandlerMiddleware = (err, req, res, next) => {
   if (err instanceof CustomAPIError) {
     return res.status(err.statusCode).json({ msg: err.message });
   }
-  console.log(`Error - ${err}`);
   return res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
     .send(`Something went wrong! Try again later. ${err}`);
