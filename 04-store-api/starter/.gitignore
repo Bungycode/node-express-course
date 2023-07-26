@@ -1,2 +1,6 @@
 /node_modules
 .env
+connect1.js
+product1.js
+asyncWrapper.js
+products1.js
